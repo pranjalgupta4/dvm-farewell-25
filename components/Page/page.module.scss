@@ -1,0 +1,82 @@
+@font-face {
+  font-family: Neotrax;
+  src: url("/public/fonts/neotrax-regular.ttf");
+  font-weight: 400;
+}
+.container {
+  height: 100vh;
+  width: 100vw;
+  background: center / cover no-repeat url("/public/bg.png");
+
+  .subcontainer {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.1rem;
+    position: relative;
+
+    @keyframes pulse {
+      0% {
+        backdrop-filter: brightness(110%);
+      }
+      50% {
+        backdrop-filter: brightness(160%);
+      }
+      100% {
+        backdrop-filter: brightness(110%);
+      }
+    }
+    animation: pulse 3s infinite ease-in-out;
+
+    .header {
+      width: 44%;
+    }
+    .logoContainer {
+      width: 9.375%;
+      position: absolute;
+      top: 1.5%;
+      left: 32%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      img {
+        width: calc(9.375 * 0.2vw);
+        height: calc(9.375 * 0.2vw);
+      }
+    }
+    .logoContainer2 {
+      left: 58.5%;
+      flex-direction: row-reverse;
+    }
+    .banner {
+      width: 34.6%;
+    }
+    .gratitude {
+      width: 55.5%;
+      position: relative;
+      img {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+      p {
+        color: #cccccccc;
+        text-align: center;
+        margin: 1rem 2.5rem;
+        font-family: Neotrax;
+      }
+    }
+    .date {
+      position: absolute;
+      width: 17.3%;
+      bottom: 0;
+      left: 0;
+      margin: 0.3rem;
+    }
+  }
+}
