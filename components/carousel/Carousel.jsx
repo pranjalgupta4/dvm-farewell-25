@@ -7,46 +7,229 @@ import mainPlate from "../../public/verticals/mainPlate.png";
 import subPlate from "../../public/verticals/subPlate.png";
 import king from "../../public/verticals/virat kohli.png";
 import frame2 from "../../public/verticals/frame2.png";
+import leftArrow from "../../public/verticals/leftArrow.svg";
+import rightArrow from "../../public/verticals/rightArrow.svg";
 
 import verticals from "./verticals.js";
 
 function Carousel() {
-  const [indx, setindx] = useState(0);
-  const verticalsRef = useRef([]);
   const { contextSafe } = useGSAP();
 
-  const initialPose = contextSafe(() => {
-    verticalsRef.current.forEach((el, index) => {
-      gsap.set(el, {
-        rotateY:
-          index === 0
-            ? "-13deg"
-            : index === 4
-            ? "13deg"
-            : index === 1
-            ? "-4deg"
-            : index === 3
-            ? "4deg"
-            : "0deg",
-        z: index === 0 || index === 4 ? "-30px" : "-10px",
+  const [indx, setindx] = useState(2);
+  const [memberIndx, setmemberIndx] = useState(3);
+
+  const verticalsRef = useRef([]);
+  const membersRef = useRef([]);
+
+  const allMembers = verticals.flatMap((vertical) =>
+    vertical.members.map((member) => ({
+      ...member,
+      team: vertical.team,
+      index: vertical.index,
+    }))
+  );
+  const switcherMem = (num) =>
+    num < 0 ? num + allMembers.length : num > 5 ? num - allMembers.length : num;
+  const switcher = (num) =>
+    num < 0 ? num + verticals.length : num > 5 ? num - verticals.length : num;
+
+  // useEffect(() => {
+  //   setindx(allMembers[switcherMem(memberIndx)].index);
+  //   console.log(indx);
+  // }, [memberIndx]);
+
+  useEffect(() => {
+    const initialPose = contextSafe(() => {
+      membersRef.current.forEach((el, index) => {
+        switch (index) {
+          case switcherMem(memberIndx - 2):
+            gsap.to(el, {
+              display: "grid",
+              x: "-83%",
+              y: "-2%",
+              z: "-150px",
+              filter: "blur(2px) contrast(1.2) brightness(0.3)",
+              scale: 1,
+              opacity: 1,
+              duration: 1,
+              ease: "circ.out",
+            });
+            break;
+
+          case switcherMem(memberIndx - 1):
+            gsap.to(el, {
+              display: "grid",
+              x: "-45%",
+              y: "-2%",
+              z: "-100px",
+              filter: "blur(1px) contrast(1.2) brightness(0.6)",
+              duration: 1,
+              ease: "circ.out",
+            });
+            break;
+
+          case switcherMem(memberIndx):
+            gsap.to(el, {
+              x: "0%",
+              y: "0%",
+              z: "0px",
+              filter: "blur(0px) contrast(1) brightness(1)",
+              duration: 1,
+              ease: "circ.out",
+            });
+            break;
+
+          case switcherMem(memberIndx + 1):
+            gsap.to(el, {
+              display: "grid",
+              x: "45%",
+              y: "-2%",
+              z: "-100px",
+              filter: "blur(1px) contrast(1.2) brightness(0.6)",
+              duration: 1,
+              ease: "circ.out",
+            });
+            break;
+
+          case switcherMem(memberIndx + 2):
+            gsap.to(el, {
+              display: "grid",
+              x: "83%",
+              y: "-2%",
+              z: "-150px",
+              filter: "blur(2px) contrast(1.2) brightness(0.3)",
+              duration: 1,
+              ease: "circ.out",
+            });
+            break;
+
+          default:
+            gsap.to(el, {
+              display: "grid",
+              x: "0",
+              y: "-2%",
+              z: "-150px",
+              filter: "blur(2px) contrast(1.2) brightness(0.3)",
+              opacity: 0,
+              scale: 0,
+              duration: 1,
+              ease: "circ.out",
+            });
+        }
       });
     });
-  });
+    initialPose();
+  }, [memberIndx]);
+
   useEffect(() => {
+    const initialPose = contextSafe(() => {
+      verticalsRef.current.forEach((el, index) => {
+        if (index === switcher(indx + 3)) {
+          gsap.set(el, {
+            display: "none",
+          });
+        } else {
+          const targetMap = {
+            [switcher(indx - 2)]: "-10deg",
+            [switcher(indx - 1)]: "-6deg",
+            [switcher(indx + 1)]: "6deg",
+            [switcher(indx + 2)]: "10deg",
+          };
+          const angle = targetMap[index] || "0deg";
+
+          const targetMap2 = {
+            [switcher(indx - 2)]: "-30px",
+            [switcher(indx - 1)]: "-10px",
+            [switcher(indx + 1)]: "-10px",
+            [switcher(indx + 2)]: "-30px",
+          };
+          const zTranslate = targetMap2[index] || "0px";
+
+          gsap.to(el, {
+            display: "flex",
+            z: zTranslate,
+            rotateY: angle,
+            duration: 1,
+            ease: "power2.inOut",
+          });
+        }
+      });
+    });
+
     initialPose();
   }, []);
+
+  const verticalMover = contextSafe(() => {
+    verticalsRef.current.forEach((el, index) => {
+      if (index === switcher(indx + 3)) {
+        gsap.set(el, {
+          display: "none",
+        });
+      } else {
+        const targetMap = {
+          [switcher(indx - 2)]: "-10deg",
+          [switcher(indx - 1)]: "-6deg",
+          [switcher(indx + 1)]: "6deg",
+          [switcher(indx + 2)]: "10deg",
+        };
+        const angle = targetMap[index] || "0deg";
+
+        const targetMap2 = {
+          [switcher(indx - 2)]: "-30px",
+          [switcher(indx - 1)]: "-10px",
+          [switcher(indx + 1)]: "-10px",
+          [switcher(indx + 2)]: "-30px",
+        };
+        const zTranslate = targetMap2[index] || "0px";
+
+        gsap.to(el, {
+          display: "flex",
+          z: zTranslate,
+          rotateY: angle,
+          duration: 1,
+          ease: "power2.inOut",
+        });
+      }
+    });
+  });
+
+  const handleClick = (direction) => {
+    setmemberIndx((prev) => {
+      return direction === "left"
+        ? switcherMem(prev + 1)
+        : switcherMem(prev - 1);
+    });
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.carousel}>
-        <div className={styles.framedPic}>
-          <img src={king} alt="king" />
-          <img src={frame2} alt="frame2" />
-        </div>
+        {allMembers.map((member, index) => (
+          <div
+            key={index}
+            className={styles.framedPic}
+            ref={(el) => (membersRef.current[index] = el)}
+          >
+            <img src={member.pic} alt="membersPic" />
+            <img src={frame2} alt="frame2" />
+          </div>
+        ))}
+        <img
+          src={leftArrow}
+          alt="leftArrow"
+          className={styles.arrow}
+          onClick={() => handleClick("left")}
+        />
+        <img
+          src={rightArrow}
+          alt="rightArrow"
+          className={styles.arrow}
+          onClick={() => handleClick("right")}
+        />
       </div>
       <div className={styles.verticals}>
-        {verticals.slice(indx, indx + 5).map((vertical, index) =>
-          index !== 2 ? (
+        {verticals.map((vertical, index) =>
+          index !== indx ? (
             <div
               key={index}
               className={styles.vertical}

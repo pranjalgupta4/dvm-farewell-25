@@ -50,7 +50,6 @@
     @include displayFlex(flex-start, column);
     gap: 0.1rem;
     position: relative;
-
     animation: pulse 3s infinite ease-in-out;
 
     .header {
