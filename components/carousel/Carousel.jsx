@@ -29,7 +29,7 @@ function Carousel() {
     }))
   );
   const switcherMem = (num) =>
-    num < 0 ? num + allMembers.length : num > 5 ? num - allMembers.length : num;
+    num < 0 ? num + allMembers.length : num > 7 ? num - allMembers.length : num;
   const switcher = (num) =>
     num < 0 ? num + verticals.length : num > 5 ? num - verticals.length : num;
 
@@ -39,12 +39,25 @@ function Carousel() {
   // }, [memberIndx]);
 
   useEffect(() => {
-    const initialPose = contextSafe(() => {
+    console.log("memberIndx: ", memberIndx);
+    const carouselMover = contextSafe(() => {
       membersRef.current.forEach((el, index) => {
         switch (index) {
+          case switcherMem(memberIndx - 3):
+            gsap.to(el, {
+              x: "-120%",
+              y: "-2%",
+              z: "-250px",
+              filter: "blur(2px) contrast(1.2) brightness(0.3)",
+              opacity: 0,
+              scale: 1,
+              duration: 1,
+              ease: "circ.out",
+            });
+            break;
+
           case switcherMem(memberIndx - 2):
             gsap.to(el, {
-              display: "grid",
               x: "-83%",
               y: "-2%",
               z: "-150px",
@@ -57,47 +70,90 @@ function Carousel() {
             break;
 
           case switcherMem(memberIndx - 1):
-            gsap.to(el, {
-              display: "grid",
-              x: "-45%",
-              y: "-2%",
-              z: "-100px",
-              filter: "blur(1px) contrast(1.2) brightness(0.6)",
-              duration: 1,
-              ease: "circ.out",
-            });
+            gsap
+              // .to(el, {
+              //   x: "0%",
+              //   y: "0%",
+              //   z: "-100px",
+              //   filter: "blur(0px) contrast(1) brightness(1)",
+              //   duration: 1,
+              //   ease: "circ.out",
+              // });
+              .to(el, {
+                x: "-45%",
+                y: "-2%",
+                z: "-100px",
+                filter: "blur(1px) contrast(1.2) brightness(0.6)",
+                duration: 1,
+                ease: "circ.out",
+              });
             break;
 
           case switcherMem(memberIndx):
-            gsap.to(el, {
-              x: "0%",
-              y: "0%",
-              z: "0px",
-              filter: "blur(0px) contrast(1) brightness(1)",
-              duration: 1,
-              ease: "circ.out",
-            });
+            const tl1 = gsap.timeline();
+            tl1
+              .to(el, {
+                x: "-53%",
+                y: "-1%",
+                z: "-50px",
+                filter: "blur(0.5px) contrast(1.1) brightness(0.8)",
+                duration: 0.5,
+                // scale: 0.9,
+                ease: "sine.inOut",
+              })
+              .to(el, {
+                x: "0%",
+                y: "0%",
+                z: "0px",
+                filter: "blur(0px) contrast(1) brightness(1)",
+                duration: 0.5,
+                ease: "circ.out",
+              });
             break;
 
           case switcherMem(memberIndx + 1):
-            gsap.to(el, {
-              display: "grid",
-              x: "45%",
-              y: "-2%",
-              z: "-100px",
-              filter: "blur(1px) contrast(1.2) brightness(0.6)",
-              duration: 1,
-              ease: "circ.out",
-            });
+            const tl2 = gsap.timeline();
+            tl2
+              .to(el, {
+                x: "53%",
+                y: "-1%",
+                z: "-50px",
+                filter: "blur(0.5px) contrast(1.1) brightness(0.8)",
+                duration: 0.5,
+                // scale: 0.9,
+                ease: "sine.inOut",
+              })
+              .to(el, {
+                x: "45%",
+                y: "-2%",
+                z: "-100px",
+                filter: "blur(1px) contrast(1.2) brightness(0.6)",
+                duration: 0.5,
+                ease: "circ.out",
+              });
             break;
 
           case switcherMem(memberIndx + 2):
             gsap.to(el, {
-              display: "grid",
               x: "83%",
               y: "-2%",
               z: "-150px",
               filter: "blur(2px) contrast(1.2) brightness(0.3)",
+              duration: 1,
+              ease: "circ.out",
+              opacity: 1,
+              scale: 1,
+            });
+            break;
+
+          case switcherMem(memberIndx + 3):
+            gsap.to(el, {
+              x: "120%",
+              y: "-2%",
+              z: "-250px",
+              filter: "blur(2px) contrast(1.2) brightness(0.3)",
+              scale: 1,
+              opacity: 0,
               duration: 1,
               ease: "circ.out",
             });
@@ -105,10 +161,9 @@ function Carousel() {
 
           default:
             gsap.to(el, {
-              display: "grid",
-              x: "0",
-              y: "-2%",
-              z: "-150px",
+              x: "0%",
+              y: "0%",
+              z: "-250px",
               filter: "blur(2px) contrast(1.2) brightness(0.3)",
               opacity: 0,
               scale: 0,
@@ -118,7 +173,7 @@ function Carousel() {
         }
       });
     });
-    initialPose();
+    carouselMover();
   }, [memberIndx]);
 
   useEffect(() => {
