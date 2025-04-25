@@ -1,11 +1,17 @@
 import styles from "./page.module.scss";
-import header from "../../public/header.png";
-import banner from "../../public/farewell-banner.png";
-import gratitude from "../../public/gratitude-bg.png";
-import date from "../../public/party-date.svg";
-import dvm from "../../public/DVM logo.svg";
-import oasis from "../../public/oasis.svg";
-import apogee from "../../public/apogee.svg";
+import Carousel from "../carousel/Carousel";
+
+import header from "../../public/page/header.png";
+import banner from "../../public/page/farewell-banner.png";
+import gratitude from "../../public/page/gratitude-bg.png";
+import accessBG from "../../public/page/accessBG.png";
+
+import date from "../../public/page/party-date.svg";
+import dvm from "../../public/page/DVM logo.svg";
+import oasis from "../../public/page/oasis.svg";
+import apogee from "../../public/page/apogee.svg";
+import randomScroll from "../../public/page/randomScroll.svg";
+import lock from "../../public/page/lock.svg";
 
 function Page() {
   return (
@@ -13,24 +19,48 @@ function Page() {
       <div className={styles.subcontainer}>
         <img src={header} alt="header" className={styles.header} />
         <div className={styles.logoContainer}>
-          <a href="https://www.bits-apogee.org/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.bits-apogee.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={apogee} alt="apogee-logo" />
           </a>
-          <a href="https://www.bits-oasis.org/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.bits-oasis.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={oasis} alt="oasis-logo" />
           </a>
-          <a href="https://bits-dvm.org/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://bits-dvm.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={dvm} alt="dvm-logo" />
           </a>
         </div>
         <div className={styles.logoContainer + " " + styles.logoContainer2}>
-          <a href="https://www.bits-apogee.org/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.bits-apogee.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={apogee} alt="apogee-logo" />
           </a>
-          <a href="https://www.bits-oasis.org/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://www.bits-oasis.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={oasis} alt="oasis-logo" />
           </a>
-          <a href="https://bits-dvm.org/" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://bits-dvm.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={dvm} alt="dvm-logo" />
           </a>
         </div>
@@ -42,6 +72,23 @@ function Page() {
             fun and memories along the way. Here’s to a bright future!
           </p>
         </div>
+        <div className={styles.accessories}>
+          <img
+            src={randomScroll}
+            alt="randomScroll"
+            className={styles.randomScroll}
+          />
+          <div className={styles.accessBox1}>
+            <img src={accessBG} alt="accessBG"/>
+            <p>END OF THE YEAR</p>
+            <img src={lock} alt="lock" className={styles.lock} />
+          </div>
+          <div className={styles.accessBox1}>
+            <img src={accessBG} alt="accessBG"/>
+            <p>T - 22:22</p>
+          </div>
+        </div>
+        <Carousel />
         <img src={date} alt="party-date" className={styles.date} />
       </div>
     </div>

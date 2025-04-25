@@ -3,32 +3,54 @@
   src: url("/public/fonts/neotrax-regular.ttf");
   font-weight: 400;
 }
+@font-face {
+  font-family: Inter;
+  src: url("/public/fonts/inter-regular.ttf");
+  font-weight: 400;
+}
+
+@keyframes pulse {
+  0% {
+    backdrop-filter: brightness(110%);
+  }
+  50% {
+    backdrop-filter: brightness(160%);
+  }
+  100% {
+    backdrop-filter: brightness(110%);
+  }
+}
+@mixin displayFlex($justify, $direction: row, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin textOnBG() {
+  position: relative;
+  img:first-child {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+}
+
 .container {
   height: 100vh;
   width: 100vw;
-  background: center / cover no-repeat url("/public/bg.png");
+  background: center / cover no-repeat url("/public/page/bg.png");
 
   .subcontainer {
     height: 100vh;
     width: 100vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    @include displayFlex(flex-start, column);
     gap: 0.1rem;
     position: relative;
 
-    @keyframes pulse {
-      0% {
-        backdrop-filter: brightness(110%);
-      }
-      50% {
-        backdrop-filter: brightness(160%);
-      }
-      100% {
-        backdrop-filter: brightness(110%);
-      }
-    }
     animation: pulse 3s infinite ease-in-out;
 
     .header {
@@ -39,12 +61,10 @@
       position: absolute;
       top: 1.5%;
       left: 32%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include displayFlex(space-between);
       img {
-        width: calc(9.375 * 0.2vw);
-        height: calc(9.375 * 0.2vw);
+        width: calc(0.2 * 9.375vw);
+        height: calc(0.2 * 9.375vw);
       }
     }
     .logoContainer2 {
@@ -56,19 +76,40 @@
     }
     .gratitude {
       width: 55.5%;
-      position: relative;
-      img {
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-      }
+      @include textOnBG();
       p {
         color: #cccccccc;
         text-align: center;
         margin: 1rem 2.5rem;
         font-family: Neotrax;
+        font-size: 1.5vw;
+      }
+    }
+    .accessories {
+      width: 20.2%;
+      margin: 1rem;
+      @include displayFlex(space-between);
+
+      .randomScroll {
+        width: calc(0.08 * 19.7vw);
+        height: calc(0.087 * 19.7vw);
+      }
+      .accessBox1 {
+        width: calc(0.49 * 19.7vw);
+        height: calc(0.087 * 19.7vw);
+        @include textOnBG();
+        @include displayFlex(space-around);
+        p {
+          color: #ffffff;
+          font-family: Inter;
+          font-size: calc(0.035 * 19.7vw);
+        }
+        .lock{
+          width: calc(0.1 * 19.7vw);
+        }
+      }
+      .accessBox1:last-child {
+        width: calc(0.39 * 19.7vw);
       }
     }
     .date {

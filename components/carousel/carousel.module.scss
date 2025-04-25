@@ -1,0 +1,111 @@
+@font-face {
+  font-family: Inter;
+  src: url("/public/fonts/inter-regular.ttf");
+  font-weight: 400;
+}
+@mixin displayFlex($justify, $direction: row, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin textOnBG() {
+  position: relative;
+  img:first-child {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+}
+.container {
+  width: 51%;
+  @include displayFlex(center, column);
+  perspective: 1300px;
+
+  .carousel {
+    width: 100%;
+    @include displayFlex(center);
+    margin-bottom: 15vh;
+    position: relative;
+
+    .framedPic {
+      width: 38%;
+      display: grid;
+      grid-template-columns: 1;
+      grid-template-rows: 1;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 90%;
+        height: 90%;
+        box-shadow: 0px 0px 35px 15px #5d182d;
+        pointer-events: none;
+        transform: translate(5%, 5%);
+      }
+
+      img {
+        grid-row: 1;
+        grid-column: 1;
+        width: 100%;
+        -webkit-mask-image: url("/public/verticals/frame.svg");
+        -webkit-mask-size: contain;
+        mask-image: url("/public/verticals/frame.svg");
+        mask-size: contain;
+        mask-repeat: no-repeat;
+      }
+    }
+  }
+
+  .verticals {
+    // margin-top: 54vh;
+    width: 97%;
+    @include displayFlex(space-between);
+    transform-style: preserve-3d;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 1),
+        transparent 40%,
+        transparent 60%,
+        rgba(0, 0, 0, 1)
+      );
+      pointer-events: none;
+    }
+
+    .vertical {
+      width: calc(0.164 * 48vw);
+      height: calc(0.045 * 48vw);
+      z-index: 2;
+      @include displayFlex(center);
+      @include textOnBG();
+      p {
+        color: white;
+        font-size: calc(0.02 * 48vw);
+        font-family: Inter;
+      }
+    }
+
+    .verticalMain {
+      width: calc(0.31 * 48vw);
+      height: calc(0.075 * 48vw);
+      @include displayFlex(center);
+      @include textOnBG();
+      p {
+        color: white;
+        font-size: calc(0.035 * 48vw);
+        font-family: Inter;
+      }
+    }
+  }
+}
