@@ -1,7 +1,12 @@
 @font-face {
-  font-family: Inter;
-  src: url("/public/fonts/inter-regular.ttf");
+  font-family: Neotrax;
+  src: url("/public/fonts/neotrax-regular.ttf");
   font-weight: 400;
+}
+@font-face {
+  font-family: Bristone;
+  src: url("/public/fonts/Bristone.ttf");
+  // font-weight: 400;
 }
 @mixin displayFlex($justify, $direction: row, $align: center) {
   display: flex;
@@ -64,19 +69,33 @@
         mask-repeat: no-repeat;
       }
     }
+    .namePlate {
+      position: absolute;
+      bottom: 3vw;
+      color: #e63d4b;
+      font-size: calc(0.04 * 48vw);
+      font-family: Bristone;
+    }
 
     .arrow {
+      position: absolute;
       top: 35%;
       left: 24.5%;
       transform: translate(0%, -50%);
       width: 4.5%;
-      position: absolute;
       cursor: pointer;
       z-index: 10;
     }
     .arrow:last-child {
       right: 24.5%;
       left: auto;
+    }
+    .light {
+      position: absolute;
+      bottom: -2.1vw;
+      width: 100%;
+      z-index: -10;
+      transform: translateZ(-200px);
     }
   }
 
@@ -108,7 +127,7 @@
       p {
         color: white;
         font-size: calc(0.02 * 48vw);
-        font-family: Inter;
+        font-family: Neotrax;
       }
     }
 
@@ -120,7 +139,7 @@
       p {
         color: white;
         font-size: calc(0.035 * 48vw);
-        font-family: Inter;
+        font-family: Neotrax;
       }
     }
   }
