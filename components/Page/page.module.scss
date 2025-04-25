@@ -52,6 +52,10 @@
     position: relative;
     animation: pulse 3s infinite ease-in-out;
 
+    @media (max-width: 768px) {
+      gap: 0.05rem;
+    }
+
     .header {
       width: 44%;
     }
@@ -70,9 +74,58 @@
       left: 58.5%;
       flex-direction: row-reverse;
     }
+
+    .mobileHeader {
+      box-sizing: border-box;
+      width: 50px;
+      height: 50px;
+      padding: 5px;
+      border-radius: 100px;
+      border: 1px solid #7c0000;
+      background-color: #0d051b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+      img {
+        transform: translateX(1px);
+        width: 80%;
+        height: 80%;
+      }
+    }
+
     .banner {
       width: 34.6%;
     }
+
+    @media (max-width: 768px) {
+      .banner {
+        width: 70%;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .banner {
+        width: 80%;
+      }
+    }
+
+    @media (max-width: 550px) {
+      .mobileHeader {
+        width: 40px;
+        height: 40px;
+        padding: 4px;
+        img {
+          transform: translateX(0px);
+          width: 90%;
+          height: 90%;
+        }
+      }
+      .banner {
+        width: 90%;
+      }
+    }
+
     .gratitude {
       width: 55.5%;
       @include textOnBG();
@@ -103,7 +156,7 @@
           font-family: Inter;
           font-size: calc(0.035 * 19.7vw);
         }
-        .lock{
+        .lock {
           width: calc(0.1 * 19.7vw);
         }
       }
