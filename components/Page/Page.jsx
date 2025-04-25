@@ -1,75 +1,107 @@
 import styles from "./page.module.scss";
 import Carousel from "../carousel/Carousel";
 
-import header from "../../public/page/header.png";
-import banner from "../../public/page/farewell-banner.png";
-import gratitude from "../../public/page/gratitude-bg.png";
-import accessBG from "../../public/page/accessBG.png";
+import header from "/page/header.png";
+import banner from "/page/farewell-banner.png";
+import gratitude from "/page/gratitude-bg.png";
+import accessBG from "/page/accessBG.png";
 
-import date from "../../public/page/party-date.svg";
-import dvm from "../../public/page/DVM logo.svg";
-import oasis from "../../public/page/oasis.svg";
-import apogee from "../../public/page/apogee.svg";
-import randomScroll from "../../public/page/randomScroll.svg";
-import lock from "../../public/page/lock.svg";
+import date from "/page/party-date.svg";
+import dvm from "/page/DVM logo.svg";
+import oasis from "/page/oasis.svg";
+import apogee from "/page/apogee.svg";
+import randomScroll from "/page/randomScroll.svg";
+import lock from "/page/lock.svg";
+
+import { useEffect, useState } from "react";
+
+import MobileView from "../MobileView/MobileView";
 
 function Page() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    handleResize(); // Set initial state
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.subcontainer}>
-        <img src={header} alt="header" className={styles.header} />
-        <div className={styles.logoContainer}>
-          <a
-            href="https://www.bits-apogee.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={apogee} alt="apogee-logo" />
-          </a>
-          <a
-            href="https://www.bits-oasis.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={oasis} alt="oasis-logo" />
-          </a>
-          <a
-            href="https://bits-dvm.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={dvm} alt="dvm-logo" />
-          </a>
-        </div>
-        <div className={styles.logoContainer + " " + styles.logoContainer2}>
-          <a
-            href="https://www.bits-apogee.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={apogee} alt="apogee-logo" />
-          </a>
-          <a
-            href="https://www.bits-oasis.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={oasis} alt="oasis-logo" />
-          </a>
-          <a
-            href="https://bits-dvm.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={dvm} alt="dvm-logo" />
-          </a>
-        </div>
+        {!isMobile && (
+          <>
+            <img src={header} alt="header" className={styles.header} />
+            <div className={styles.logoContainer}>
+              <a
+                href="https://www.bits-apogee.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={apogee} alt="apogee-logo" />
+              </a>
+              <a
+                href="https://www.bits-oasis.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={oasis} alt="oasis-logo" />
+              </a>
+              <a
+                href="https://bits-dvm.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={dvm} alt="dvm-logo" />
+              </a>
+            </div>
+            <div className={styles.logoContainer + " " + styles.logoContainer2}>
+              <a
+                href="https://www.bits-apogee.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={apogee} alt="apogee-logo" />
+              </a>
+              <a
+                href="https://www.bits-oasis.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={oasis} alt="oasis-logo" />
+              </a>
+              <a
+                href="https://bits-dvm.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={dvm} alt="dvm-logo" />
+              </a>
+            </div>
+          </>
+        )}
+        {isMobile && (
+          <div className={styles.mobileHeader}>
+            <img src={dvm} className={styles.mobilelogo} alt="dvm" />
+          </div>
+        )}
         <img src={banner} alt="banner" className={styles.banner} />
         <div className={styles.gratitude}>
           <img src={gratitude} alt="gratitude-bg" />
           <p>
             You made our time here special! This journey had tons of learning,
-            fun and memories along the way. Here’s to a bright future!
+            fun and memories along the way. Here's to a bright future!
           </p>
         </div>
         <div className={styles.accessories}>
@@ -79,12 +111,12 @@ function Page() {
             className={styles.randomScroll}
           />
           <div className={styles.accessBox1}>
-            <img src={accessBG} alt="accessBG"/>
+            <img src={accessBG} alt="accessBG" />
             <p>END OF THE YEAR</p>
             <img src={lock} alt="lock" className={styles.lock} />
           </div>
           <div className={styles.accessBox1}>
-            <img src={accessBG} alt="accessBG"/>
+            <img src={accessBG} alt="accessBG" />
             <p>T - 22:22</p>
           </div>
         </div>
