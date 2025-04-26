@@ -9,8 +9,8 @@ import frame2 from "/verticals/frame2.png";
 import base from "/verticals/basemobilering.png";
 import projection from "/verticals/mobileProjection.png";
 
-import leftArrow from "/verticals/leftArrow.svg";
-import rightArrow from "/verticals/rightArrow.svg";
+import leftArrow from "/verticals/leftArrow2.svg";
+import rightArrow from "/verticals/rightArrow2.svg";
 
 import verticals from "../carousel/verticals.js";
 
@@ -240,8 +240,6 @@ export default function MobileView() {
     //   });
     // });
 
-
-    
     //Nameplate Animation
     const namePlateChanger = contextSafe(() => {
       if (namePlateRef.current) {
@@ -329,11 +327,9 @@ export default function MobileView() {
           />
           <img src={frame2} alt="frame2" />
         </div>
-        <div className={styles.subPlate}>
-          <p className={styles.namePlate} ref={namePlateRef}>
-            {namePlate}
-          </p>
-        </div>
+        <p className={styles.namePlate} ref={namePlateRef}>
+          {namePlate}
+        </p>
         <div className={styles.verticalLogo}>
           <img
             src={verticalLogos[indx]}
