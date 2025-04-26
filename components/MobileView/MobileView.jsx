@@ -328,7 +328,11 @@ export default function MobileView() {
     <div className={styles.container}>
       <div className={styles.carousel}>
         <div className={styles.framedPic} ref={membersRef}>
-          <img src={allMembers[memberIndx].pic} alt="membersPic" />
+          <img
+            src={allMembers[memberIndx].pic}
+            className={styles.memberpics}
+            alt="membersPic"
+          />
           <img src={frame2} alt="frame2" />
         </div>
         <div className={styles.subPlate}>
