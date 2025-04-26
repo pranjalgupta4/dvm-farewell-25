@@ -67,6 +67,9 @@
       @media (min-width: 600px) {
         width: 50%;
       }
+      @media (max-height: 1000px) {
+        width: 65%;
+      }
       @media (max-width: 400px) {
         width: 50%;
       }
@@ -114,10 +117,16 @@
       width: 8%;
       cursor: pointer;
       z-index: 10;
+      @media (max-height: 1000px) {
+        left: 8%;
+      }
     }
     .arrow:last-child {
       right: 5%;
       left: auto;
+      @media (max-height: 1000px) {
+        right: 8%;
+      }
     }
 
     .verticalLogo {
@@ -170,6 +179,14 @@
         height: 60px;
       }
     }
+    @media (max-height: 1000px) {
+      .verticalLogo {
+        top: -20px;
+        right: 50px;
+        width: 50px;
+        height: 50px;
+      }
+    }
   }
 
   .verticals {
@@ -209,6 +226,9 @@
     }
     @media screen and (max-width: 780px) {
       bottom: 10vh;
+    }
+    @media (max-height:1000px) {
+      width: 60%;
     }
   }
 
