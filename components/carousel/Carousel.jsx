@@ -25,10 +25,12 @@ function Carousel() {
   const [animatorLeft, setAnimatorLeft] = useState(true);
   const [animator, setAnimator] = useState(false);
   const [namePlate, setnamePlate] = useState("");
+  const [teamNamePlate, setteamNamePlate] = useState("");
 
   const verticalsRef = useRef([]);
   const membersRef = useRef([]);
   const namePlateRef = useRef();
+  const teamNameRef = useRef();
 
   const allMembers = verticals.flatMap((vertical) =>
     vertical.members.map((member) => ({
@@ -39,8 +41,7 @@ function Carousel() {
   );
   const switcherMem = (num) =>
     num < 0 ? num + allMembers.length : num > 7 ? num - allMembers.length : num;
-  const switcher = (num) =>
-    num < 0 ? num + verticals.length : num > 5 ? num - verticals.length : num;
+  const switcher = (num) => (num < 0 ? num + 6 : num > 5 ? num - 6 : num);
 
   //Image Carousel Animation
   useEffect(() => {
@@ -262,42 +263,139 @@ function Carousel() {
   }, [memberIndx]);
 
   useEffect(() => {
-    const initialPose = contextSafe(() => {
+    const verticalMover = contextSafe(() => {
       verticalsRef.current.forEach((el, index) => {
-        if (index === switcher(indx + 3)) {
-          gsap.set(el, {
-            display: "none",
-          });
-        } else {
-          const targetMap = {
-            [switcher(indx - 2)]: "-10deg",
-            [switcher(indx - 1)]: "-6deg",
-            [switcher(indx + 1)]: "6deg",
-            [switcher(indx + 2)]: "10deg",
-          };
-          const angle = targetMap[index] || "0deg";
+        switch (index) {
+          case switcher(indx - 2):
+            gsap.to(el, {
+              z: "-30px",
+              left: "0%",
+              x: "0%",
+              rotateY: "-10deg",
+              opacity: 1,
+              duration: 1,
+              ease: "power2.inOut",
+            });
+            break;
 
-          const targetMap2 = {
-            [switcher(indx - 2)]: "-30px",
-            [switcher(indx - 1)]: "-10px",
-            [switcher(indx + 1)]: "-10px",
-            [switcher(indx + 2)]: "-30px",
-          };
-          const zTranslate = targetMap2[index] || "0px";
+          case switcher(indx - 1):
+            gsap.to(el, {
+              z: "-10px",
+              left: "26%",
+              x: "-50%",
+              rotateY: "-6deg",
+              width: "16.4%",
+              duration: 1,
+              ease: "power2.inOut",
+            });
+            break;
 
-          gsap.to(el, {
-            display: "flex",
-            z: zTranslate,
-            rotateY: angle,
-            duration: 1,
-            ease: "power2.inOut",
-          });
+          case switcher(indx):
+            gsap.to(el, {
+              z: "0px",
+              left: "50%",
+              x: "-50%",
+              rotateY: "0deg",
+              width: "28%",
+              duration: 1,
+              ease: "power2.inOut",
+            });
+            break;
+
+          case switcher(indx + 1):
+            gsap.to(el, {
+              z: "-10px",
+              left: "74%",
+              x: "-50%",
+              rotateY: "6deg",
+              width: "16.4%",
+              duration: 1,
+              ease: "power2.inOut",
+            });
+            break;
+
+          case switcher(indx + 2):
+            gsap.to(el, {
+              z: "-30px",
+              left: "100%",
+              x: "-100%",
+              rotateY: "10deg",
+              opacity: 1,
+              duration: 1,
+              ease: "power2.inOut",
+            });
+            break;
+
+          default:
+            const tl1 = gsap.timeline({ paused: animator && animatorRight });
+            tl1
+              .to(el, {
+                z: "-30px",
+                left: "110%",
+                x: "-100%",
+                rotateY: "90deg",
+                opacity: 0,
+                duration: 1,
+                ease: "power2.inOut",
+              })
+              .to(el, {
+                z: "-30px",
+                left: "0%",
+                x: "-50%",
+                rotateY: "-70deg",
+                opacity: 0,
+                duration: 1,
+                ease: "power2.inOut",
+              });
+            const tl2 = gsap.timeline({ paused: animator && animatorLeft });
+            tl2
+              .to(el, {
+                z: "-30px",
+                left: "0%",
+                x: "-50%",
+                rotateY: "-70deg",
+                opacity: 0,
+                duration: 1,
+                ease: "power2.inOut",
+              })
+              .to(el, {
+                z: "-30px",
+                left: "110%",
+                x: "-100%",
+                rotateY: "90deg",
+                opacity: 0,
+                duration: 1,
+                ease: "power2.inOut",
+              });
+            break;
         }
       });
     });
 
-    initialPose();
-  }, []);
+    //Team Name Animation
+    const teamNameChanger = contextSafe(() => {
+      if (teamNameRef.current) {
+        const tl = gsap.timeline();
+        tl.set(teamNameRef.current, { opacity: 1 })
+          .to(teamNameRef.current, {
+            opacity: 0,
+            duration: 0.5,
+            ease: "circ.inOut",
+          })
+          .to(teamNameRef.current, {
+            opacity: 1,
+            duration: 0.5,
+            ease: "circ.inOut",
+          });
+      }
+    });
+    teamNameChanger();
+    setTimeout(() => {
+      setteamNamePlate(verticals[switcher(indx)].team);
+    }, 500);
+
+    verticalMover();
+  }, [indx]);
 
   //Calling of animation on click of arrows
   const handleClick = (direction) => {
@@ -350,10 +448,9 @@ function Carousel() {
         />
       </div>
       <div className={styles.verticals}>
-        {verticals.map((vertical, index) =>
-          index !== indx ? (
+        {verticals.map((vertical, index) => (
+          <React.Fragment key={index}>
             <div
-              key={index}
               className={styles.vertical}
               ref={(el) => (verticalsRef.current[index] = el)}
             >
@@ -364,17 +461,21 @@ function Carousel() {
               />
               <p className={styles.verticalText}>{vertical.team}</p>
             </div>
-          ) : (
-            <div key={index} className={styles.verticalMain}>
-              <img
-                src={mainPlate}
-                alt={"mainPlate"}
-                className={styles.mainPlate}
-              />
-              <p className={styles.verticalText}>{vertical.team}</p>
-            </div>
-          )
-        )}
+
+            {index === indx && (
+              <div className={styles.verticalMain}>
+                <img
+                  src={mainPlate}
+                  alt={"mainPlate"}
+                  className={styles.mainPlate}
+                />
+                <p className={styles.verticalText} ref={teamNameRef}>
+                  {teamNamePlate}
+                </p>
+              </div>
+            )}
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
