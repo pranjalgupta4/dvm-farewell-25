@@ -56,41 +56,93 @@
       gap: 0.05rem;
     }
 
-    .header {
-      width: 44%;
-    }
-    .logoContainer {
-      width: 9.375%;
-      position: absolute;
-      top: 1.5%;
-      left: 32%;
-      @include displayFlex(space-between);
-      img {
-        width: calc(0.2 * 9.375vw);
-        height: calc(0.2 * 9.375vw);
-      }
-    }
-    .logoContainer2 {
-      left: 58.5%;
-      flex-direction: row-reverse;
-    }
+    .headingContainer {
+      position: relative;
+      width: 100%;
+      height: fit-content;
+      @include displayFlex(center);
 
-    .mobileHeader {
-      box-sizing: border-box;
-      width: 50px;
-      height: 50px;
-      padding: 5px;
-      border-radius: 100px;
-      border: 1px solid #7c0000;
-      background-color: #0d051b;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 10px;
-      img {
-        transform: translateX(1px);
-        width: 80%;
-        height: 80%;
+      .desktopHeader {
+        width: 44%;
+      }
+
+      .Heading {
+        @include displayFlex(space-between);
+        position: relative;
+        width: 28%;
+        height: 100%;
+        z-index: 1;
+        img {
+          height: 60%;
+        }
+      }
+
+      .right {
+        padding-right: 30px;
+      }
+
+      .mblHeading {
+        box-sizing: border-box;
+        @include displayFlex(space-between);
+        position: relative;
+        width: 40%;
+        height: 100%;
+        z-index: 1;
+        padding: 10px;
+        margin-top: 10px;
+        img {
+          height: 30%;
+        }
+      }
+
+      .right {
+        box-sizing: border-box;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      @media (max-width: 768px) {
+        right {
+          padding-right: 0;
+        }
+      }
+
+      .header {
+        width: 100%;
+      }
+      .logoContainer {
+        width: 9.375%;
+        position: absolute;
+        top: 20%;
+        left: 32%;
+        @include displayFlex(space-between);
+        img {
+          width: calc(0.2 * 9.375vw);
+          height: calc(0.2 * 9.375vw);
+        }
+      }
+      .logoContainer2 {
+        left: 58.5%;
+        flex-direction: row-reverse;
+      }
+
+      .mobileHeader {
+        box-sizing: border-box;
+        width: 70px;
+        height: 70px;
+        padding: 5px;
+        border-radius: 100px;
+        border: 1px solid #7c0000;
+        background-color: #0d051b;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        img {
+          transform: translateX(1px);
+          width: 80%;
+          height: 80%;
+        }
       }
     }
 
@@ -100,29 +152,13 @@
 
     @media (max-width: 768px) {
       .banner {
-        width: 70%;
+        width: 85%;
       }
     }
 
     @media (max-width: 600px) {
       .banner {
-        width: 80%;
-      }
-    }
-
-    @media (max-width: 550px) {
-      .mobileHeader {
-        width: 40px;
-        height: 40px;
-        padding: 4px;
-        img {
-          transform: translateX(0px);
-          width: 90%;
-          height: 90%;
-        }
-      }
-      .banner {
-        width: 90%;
+        width: 95%;
       }
     }
 
@@ -137,6 +173,32 @@
         font-size: 1.5vw;
       }
     }
+
+    @media (max-width: 768px) {
+      .gratitude {
+        width: 78%;
+        p {
+          font-size: 1.3rem;
+        }
+      }
+    }
+    @media (max-width: 600px) {
+      .gratitude {
+        width: 87%;
+        p {
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    @media (max-width: 500px) {
+      .gratitude {
+        p {
+          font-size: 1.1rem;
+        }
+      }
+    }
+
     .accessories {
       width: 20.2%;
       margin: 1rem;
@@ -164,12 +226,31 @@
         width: calc(0.39 * 19.7vw);
       }
     }
+
+    @media (max-width: 768px) {
+      .accessories {
+        display: none;
+      }
+    }
+
+    .mobileViewContainer {
+      flex: 1;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
     .date {
       position: absolute;
       width: 17.3%;
       bottom: 0;
       left: 0;
       margin: 0.3rem;
+    }
+    @media (max-width: 768px) {
+      .date {
+        display: none;
+      }
     }
   }
 }

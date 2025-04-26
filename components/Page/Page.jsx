@@ -13,6 +13,11 @@ import apogee from "/page/apogee.svg";
 import randomScroll from "/page/randomScroll.svg";
 import lock from "/page/lock.svg";
 
+import headingLeftDesktop from "/page/headingLeftDesktop.svg";
+import headingRightDesktop from "/page/headingRightDesktop.svg";
+import headingLeftMobile from "/page/headingLeftMobile.svg";
+import headingRightMobile from "/page/headingRightMobile.svg";
+
 import { useEffect, useState } from "react";
 
 import MobileView from "../MobileView/MobileView";
@@ -40,62 +45,98 @@ function Page() {
   return (
     <div className={styles.container}>
       <div className={styles.subcontainer}>
-        {!isMobile && (
-          <>
-            <img src={header} alt="header" className={styles.header} />
-            <div className={styles.logoContainer}>
-              <a
-                href="https://www.bits-apogee.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={apogee} alt="apogee-logo" />
-              </a>
-              <a
-                href="https://www.bits-oasis.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={oasis} alt="oasis-logo" />
-              </a>
-              <a
-                href="https://bits-dvm.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={dvm} alt="dvm-logo" />
-              </a>
-            </div>
-            <div className={styles.logoContainer + " " + styles.logoContainer2}>
-              <a
-                href="https://www.bits-apogee.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={apogee} alt="apogee-logo" />
-              </a>
-              <a
-                href="https://www.bits-oasis.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={oasis} alt="oasis-logo" />
-              </a>
-              <a
-                href="https://bits-dvm.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={dvm} alt="dvm-logo" />
-              </a>
-            </div>
-          </>
-        )}
-        {isMobile && (
-          <div className={styles.mobileHeader}>
-            <img src={dvm} className={styles.mobilelogo} alt="dvm" />
-          </div>
-        )}
+        <div className={styles.headingContainer}>
+          {!isMobile && (
+            <>
+              <div className={`${styles.Heading} ${styles.left}`}>
+                <img
+                  src={headingLeftDesktop}
+                  alt="heading-left"
+                  className={styles.headingLeft}
+                />
+              </div>
+              <div className={styles.desktopHeader}>
+                <img src={header} alt="header" className={styles.header} />
+                <div className={styles.logoContainer}>
+                  <a
+                    href="https://www.bits-apogee.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={apogee} alt="apogee-logo" />
+                  </a>
+                  <a
+                    href="https://www.bits-oasis.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={oasis} alt="oasis-logo" />
+                  </a>
+                  <a
+                    href="https://bits-dvm.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={dvm} alt="dvm-logo" />
+                  </a>
+                </div>
+                <div
+                  className={styles.logoContainer + " " + styles.logoContainer2}
+                >
+                  <a
+                    href="https://www.bits-apogee.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={apogee} alt="apogee-logo" />
+                  </a>
+                  <a
+                    href="https://www.bits-oasis.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={oasis} alt="oasis-logo" />
+                  </a>
+                  <a
+                    href="https://bits-dvm.org/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={dvm} alt="dvm-logo" />
+                  </a>
+                </div>
+              </div>
+              <div className={`${styles.Heading} ${styles.right}`}>
+                <img
+                  src={headingRightDesktop}
+                  alt="heading-right"
+                  className={styles.headingRight}
+                />
+              </div>
+            </>
+          )}
+          {isMobile && (
+            <>
+              <div className={`${styles.mblHeading} ${styles.left}`}>
+                <img
+                  src={headingLeftMobile}
+                  alt="heading-left"
+                  className={styles.headingLeft}
+                />
+              </div>
+              <div className={styles.mobileHeader}>
+                <img src={dvm} className={styles.mobilelogo} alt="dvm" />
+              </div>
+              <div className={`${styles.mblHeading} ${styles.right}`}>
+                <img
+                  src={headingRightMobile}
+                  alt="heading-right"
+                  className={styles.headingRight}
+                />
+              </div>
+            </>
+          )}
+        </div>
         <img src={banner} alt="banner" className={styles.banner} />
         <div className={styles.gratitude}>
           <img src={gratitude} alt="gratitude-bg" />
@@ -120,7 +161,13 @@ function Page() {
             <p>T - 22:22</p>
           </div>
         </div>
-        <Carousel />
+
+        {isMobile && (
+          <div className={styles.mobileViewContainer}>
+            <MobileView />
+          </div>
+        )}
+        {!isMobile && <Carousel />}
         <img src={date} alt="party-date" className={styles.date} />
       </div>
     </div>
