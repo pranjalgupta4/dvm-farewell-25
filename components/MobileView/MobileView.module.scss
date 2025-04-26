@@ -30,7 +30,10 @@
 .container {
   width: 100%;
   @include displayFlex(center, column);
-  gap: 3rem;
+  gap: 2.5rem;
+  @media (min-width: 550px) {
+    gap: 1.5rem;
+  }
 
   .carousel {
     width: 100%;
@@ -40,12 +43,20 @@
     position: relative;
     transform-style: preserve-3d;
 
+    @media (min-width: 550px) {
+      gap: 1rem;
+    }
+
     .framedPic {
       width: 70%;
       display: grid;
       grid-template-columns: 1;
       grid-template-rows: 1;
       position: relative;
+
+      @media (min-width: 600px) {
+        width: 50%;
+      }
 
       // &::before {
       //   content: "";
@@ -88,12 +99,30 @@
       right: 5%;
       left: auto;
     }
-    .light {
+
+    .verticalLogo {
       position: absolute;
-      bottom: -125px;
-      width: 70%;
-      z-index: -10;
-      transform: translateZ(-200px);
+      top: -20px;
+      right: 50px;
+      width: 80px;
+      height: 80px;
+      @include displayFlex(center);
+      transform-style: preserve-3d;
+      img {
+        width: 100%;
+        height: 100%;
+        mask-size: contain;
+        mask-repeat: no-repeat;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .verticalLogo {
+        top: -20px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+      }
     }
   }
 
@@ -115,10 +144,18 @@
       }
     }
   }
+  .light {
+    position: absolute;
+    bottom: 60px;
+    width: 70%;
+    z-index: -10;
+    transform: translateZ(-200px);
+    z-index: -1;
+  }
 
   .base {
     position: absolute;
     bottom: 0;
-    z-index: -1;
+    z-index: -2;
   }
 }

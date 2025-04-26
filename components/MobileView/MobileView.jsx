@@ -14,6 +14,13 @@ import rightArrow from "/verticals/rightArrow.svg";
 
 import verticals from "../carousel/verticals.js";
 
+import video from "/verticals/video.png";
+import front from "/verticals/front.png";
+import back from "/verticals/back.png";
+import uiux from "/verticals/uiux.png";
+import app from "/verticals/app.png";
+import game from "/verticals/game.png";
+
 export default function MobileView() {
   //Declaring variables and Functions
   const { contextSafe } = useGSAP();
@@ -28,6 +35,8 @@ export default function MobileView() {
   const verticalsRef = useRef([]);
   const membersRef = useRef();
   const namePlateRef = useRef();
+
+  const verticalLogos = [front, back, uiux, app, game, video];
 
   const allMembers = verticals.flatMap((vertical) =>
     vertical.members.map((member) => ({
@@ -327,8 +336,13 @@ export default function MobileView() {
             {namePlate}
           </p>
         </div>
-
-        <img src={projection} alt="light2" className={styles.light} />
+        <div className={styles.verticalLogo}>
+          <img
+            src={verticalLogos[indx]}
+            alt="verticalLogo"
+            className={styles.verticalLogoImg}
+          />
+        </div>
         <img
           src={leftArrow}
           alt="leftArrow"
@@ -358,6 +372,7 @@ export default function MobileView() {
           )
         )}
       </div>
+      <img src={projection} alt="light2" className={styles.light} />
       <img src={base} alt="" className={styles.base} />
     </div>
   );
