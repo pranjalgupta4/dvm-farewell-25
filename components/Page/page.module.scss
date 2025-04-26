@@ -199,6 +199,14 @@
       }
     }
 
+    @media (max-width: 400px) {
+      .gratitude {
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+
     .accessories {
       width: 20.2%;
       margin: 1rem;
