@@ -48,7 +48,6 @@
   }
   overflow-y: hidden;
 
-  // iframe,
   audio {
     position: absolute;
     opacity: 0;
@@ -181,6 +180,12 @@
         margin: 1rem 2.5rem;
         font-family: Neotrax;
         font-size: 1.5vw;
+      }
+      @media screen and (max-width: 768px) {
+        p {
+          color: white;
+        }
+        
       }
     }
 
