@@ -29,7 +29,7 @@
 
 .container {
   width: 51%;
-  @include displayFlex(center, column);
+  @include displayFlex(space-between, column);
   perspective: 1300px;
 
   .carousel {
@@ -95,19 +95,22 @@
       bottom: -2.1vw;
       width: 100%;
       z-index: -10;
-      transform: translateZ(-200px);
+      transform: translateZ(-200px) translateX(1%);
     }
   }
 
   .verticals {
     width: 97%;
+    height: calc(0.045 * 48vw);
     @include displayFlex(space-between);
     transform-style: preserve-3d;
+    position: relative;
 
     &::before {
       content: "";
       position: absolute;
-      inset: 0;
+      width: 100%;
+      height: 150%;
       background: linear-gradient(
         to right,
         rgba(0, 0, 0, 1),
@@ -124,6 +127,11 @@
       z-index: 2;
       @include displayFlex(center);
       @include textOnBG();
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
       p {
         color: white;
         font-size: calc(0.02 * 48vw);
@@ -135,7 +143,21 @@
       width: calc(0.31 * 48vw);
       height: calc(0.075 * 48vw);
       @include displayFlex(center);
-      @include textOnBG();
+      position: absolute;
+      bottom: calc(-0.015 * 48vw);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      // display: none;
+
+      img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
       p {
         color: white;
         font-size: calc(0.035 * 48vw);
