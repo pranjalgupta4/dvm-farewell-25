@@ -28,6 +28,7 @@ export default function MobileView() {
   const [indx, setindx] = useState(2);
   const [memberIndx, setmemberIndx] = useState(4);
   const [namePlate, setnamePlate] = useState("");
+  const [memberImg, setmemberImg] = useState();
 
   const verticalsRef = useRef([]);
   const membersRef = useRef();
@@ -255,12 +256,26 @@ export default function MobileView() {
             duration: 0.5,
             ease: "circ.inOut",
           });
+        const tl2 = gsap.timeline();
+        tl2
+          .set(membersRef.current, { opacity: 1 })
+          .to(membersRef.current, {
+            filter: "blur(6px)",
+            duration: 0.5,
+            ease: "circ.inOut",
+          })
+          .to(membersRef.current, {
+            filter: "blur(0px)",
+            duration: 0.5,
+            ease: "circ.inOut",
+          });
       }
     });
 
     namePlateChanger();
     setTimeout(() => {
       setnamePlate(allMembers[memberIndx].name);
+      setmemberImg(allMembers[memberIndx].pic);
     }, 500);
   }, [memberIndx]);
 
@@ -319,11 +334,12 @@ export default function MobileView() {
   return (
     <div className={styles.container}>
       <div className={styles.carousel}>
-        <div className={styles.framedPic} ref={membersRef}>
+        <div className={styles.framedPic}>
           <img
-            src={allMembers[memberIndx].pic}
+            src={memberImg}
             className={styles.memberpics}
             alt="membersPic"
+            ref={membersRef}
           />
           <img src={frame2} alt="frame2" />
         </div>
