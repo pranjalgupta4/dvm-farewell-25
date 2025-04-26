@@ -40,12 +40,12 @@
 }
 
 .container {
-  height: 100vh;
+  height: 100svh;
   width: 100vw;
   background: center / cover no-repeat url("/public/page/bg.png");
 
   .subcontainer {
-    height: 100vh;
+    height: 100svh;
     width: 100vw;
     @include displayFlex(flex-start, column);
     gap: 0.1rem;
