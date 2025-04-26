@@ -48,6 +48,11 @@
   }
   overflow-y: hidden;
 
+  audio{
+    position: absolute;
+    opacity: 0;
+  }
+
   .subcontainer {
     height: 100svh;
     width: 100vw;

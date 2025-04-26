@@ -1,6 +1,7 @@
 import styles from "./page.module.scss";
 import Carousel from "../carousel/Carousel";
 import MobileView from "../MobileView/MobileView";
+import audio from "../../public/page/audio.mp3";
 
 import header from "/page/header.png";
 import banner from "/page/farewell-banner.png";
@@ -18,11 +19,11 @@ import headingRightDesktop from "/page/headingRightDesktop.svg";
 import headingLeftMobile from "/page/headingLeftMobile.svg";
 import headingRightMobile from "/page/headingRightMobile.svg";
 
-import { useEffect, useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
 
 function Page() {
   const [isMobile, setIsMobile] = useState(false);
+  const audioRef = useRef();
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,8 +42,13 @@ function Page() {
     };
   }, []);
 
+  const audioPlay = () => {
+    audioRef.current.play();
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={audioPlay}>
+      <audio src={audio} controls autoPlay loop ref={audioRef}></audio>
       <div className={styles.subcontainer}>
         <div className={styles.headingContainer}>
           {!isMobile && (
@@ -166,7 +172,7 @@ function Page() {
             <MobileView />
           </div>
         )}
-        {!isMobile && <Carousel/>}
+        {!isMobile && <Carousel />}
         <img src={date} alt="party-date" className={styles.date} />
       </div>
     </div>

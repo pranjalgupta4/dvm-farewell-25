@@ -26,7 +26,7 @@ export default function MobileView() {
   const { contextSafe } = useGSAP();
 
   const [indx, setindx] = useState(2);
-  const [memberIndx, setmemberIndx] = useState(3);
+  const [memberIndx, setmemberIndx] = useState(4);
   const [namePlate, setnamePlate] = useState("");
 
   const verticalsRef = useRef([]);
@@ -53,6 +53,195 @@ export default function MobileView() {
 
   //Image Carousel Animation
   useEffect(() => {
+    // const carouselMover = contextSafe(() => {
+    //   membersRef.current.forEach((el, index) => {
+    //     switch (index) {
+    //       case switcherMem(memberIndx - 3):
+    //         gsap.to(el, {
+    //           x: "-120%",
+    //           y: "-2%",
+    //           z: "-250px",
+    //           filter: "blur(2px) contrast(1.2) brightness(0.3)",
+    //           opacity: 0,
+    //           scale: 1,
+    //           duration: 1,
+    //           ease: "circ.out",
+    //         });
+    //         break;
+
+    //       case switcherMem(memberIndx - 2):
+    //         gsap.to(el, {
+    //           x: "-83%",
+    //           y: "-2%",
+    //           z: "-150px",
+    //           filter: "blur(2px) contrast(1.2) brightness(0.3)",
+    //           scale: 1,
+    //           opacity: 1,
+    //           duration: 1,
+    //           ease: "circ.out",
+    //         });
+    //         break;
+
+    //       case switcherMem(memberIndx - 1):
+    //         const tlFirst1 = gsap.timeline({
+    //           paused: animator && animatorRight,
+    //         });
+    //         tlFirst1.to(el, {
+    //           x: "-45%",
+    //           y: "-2%",
+    //           z: "-100px",
+    //           filter: "blur(1px) contrast(1.2) brightness(0.6)",
+    //           duration: 1,
+    //           ease: "circ.out",
+    //         });
+
+    //         const tlFirst2 = gsap.timeline({ paused: animatorLeft });
+    //         tlFirst2
+    //           .to(el, {
+    //             x: "-53%",
+    //             y: "-1%",
+    //             z: "-50px",
+    //             filter: "blur(1px) contrast(1.1) brightness(0.8)",
+    //             duration: 0.5,
+    //             ease: "sine.inOut",
+    //           })
+    //           .to(el, {
+    //             x: "-45%",
+    //             y: "-2%",
+    //             z: "-100px",
+    //             filter: "blur(1px) contrast(1.2) brightness(0.6)",
+    //             duration: 0.5,
+    //             ease: "sine.inOut",
+    //           });
+    //         break;
+
+    //       case switcherMem(memberIndx):
+    //         const tlSecond1 = gsap.timeline({ paused: animatorRight });
+    //         tlSecond1
+    //           .to(el, {
+    //             x: "-53%",
+    //             y: "-1%",
+    //             z: "-50px",
+    //             filter: "blur(0.5px) contrast(1.1) brightness(0.8)",
+    //             duration: 0.5,
+    //             ease: "sine.inOut",
+    //           })
+    //           .to(el, {
+    //             x: "0%",
+    //             y: "0%",
+    //             z: "0px",
+    //             filter: "blur(0px) contrast(1) brightness(1)",
+    //             duration: 0.5,
+    //             ease: "sine.inOut",
+    //           });
+
+    //         const tlSecond2 = gsap.timeline({ paused: animatorLeft });
+    //         tlSecond2
+    //           .to(el, {
+    //             x: "53%",
+    //             y: "-1%",
+    //             z: "-50px",
+    //             filter: "blur(1px) contrast(1.1) brightness(0.8)",
+    //             duration: 0.5,
+    //             ease: "sine.inOut",
+    //           })
+    //           .to(el, {
+    //             x: "0%",
+    //             y: "0%",
+    //             z: "0px",
+    //             filter: "blur(0px) contrast(1) brightness(1)",
+    //             duration: 0.5,
+    //             ease: "sine.inOut",
+    //           });
+    //         const tlSecond3 = gsap.timeline({
+    //           paused: animator,
+    //         });
+    //         tlSecond3.to(el, {
+    //           x: "0%",
+    //           y: "0%",
+    //           z: "0px",
+    //           filter: "blur(0px) contrast(1) brightness(1)",
+    //           duration: 1,
+    //           ease: "circ.out",
+    //         });
+    //         break;
+
+    //       case switcherMem(memberIndx + 1):
+    //         const tlThird1 = gsap.timeline({ paused: animatorRight });
+    //         tlThird1
+    //           .to(el, {
+    //             x: "53%",
+    //             y: "-1%",
+    //             z: "-50px",
+    //             filter: "blur(0.5px) contrast(1.1) brightness(0.8)",
+    //             duration: 0.5,
+    //             ease: "sine.inOut",
+    //           })
+    //           .to(el, {
+    //             x: "45%",
+    //             y: "-2%",
+    //             z: "-100px",
+    //             filter: "blur(1px) contrast(1.2) brightness(0.6)",
+    //             duration: 0.5,
+    //             ease: "sine.inOut",
+    //           });
+
+    //         const tlThird2 = gsap.timeline({
+    //           paused: animator && animatorLeft,
+    //         });
+    //         tlThird2.to(el, {
+    //           x: "45%",
+    //           y: "-2%",
+    //           z: "-100px",
+    //           filter: "blur(1px) contrast(1.2) brightness(0.6)",
+    //           duration: 1,
+    //           ease: "circ.out",
+    //         });
+    //         break;
+
+    //       case switcherMem(memberIndx + 2):
+    //         gsap.to(el, {
+    //           x: "83%",
+    //           y: "-2%",
+    //           z: "-150px",
+    //           filter: "blur(2px) contrast(1.2) brightness(0.3)",
+    //           duration: 1,
+    //           ease: "circ.out",
+    //           opacity: 1,
+    //           scale: 1,
+    //         });
+    //         break;
+
+    //       case switcherMem(memberIndx + 3):
+    //         gsap.to(el, {
+    //           x: "120%",
+    //           y: "-2%",
+    //           z: "-250px",
+    //           filter: "blur(2px) contrast(1.2) brightness(0.3)",
+    //           scale: 1,
+    //           opacity: 0,
+    //           duration: 1,
+    //           ease: "circ.out",
+    //         });
+    //         break;
+
+    //       default:
+    //         gsap.to(el, {
+    //           x: "0%",
+    //           y: "0%",
+    //           z: "-250px",
+    //           filter: "blur(2px) contrast(1.2) brightness(0.3)",
+    //           opacity: 0,
+    //           scale: 0,
+    //           duration: 1,
+    //           ease: "circ.out",
+    //         });
+    //     }
+    //   });
+    // });
+
+
+    
     //Nameplate Animation
     const namePlateChanger = contextSafe(() => {
       if (namePlateRef.current) {
@@ -168,7 +357,7 @@ export default function MobileView() {
       <div className={styles.verticals}>
         {verticals.map((vertical, index) =>
           index !== indx ? (
-            <></>
+            <React.Fragment key={index}></React.Fragment>
           ) : (
             <div key={index} className={styles.verticalMain}>
               <img
