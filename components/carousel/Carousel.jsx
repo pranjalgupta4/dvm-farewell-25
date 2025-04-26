@@ -20,7 +20,7 @@ function Carousel() {
   const { contextSafe } = useGSAP();
 
   const [indx, setindx] = useState(2);
-  const [memberIndx, setmemberIndx] = useState(3);
+  const [memberIndx, setmemberIndx] = useState(4);
   const [animatorRight, setAnimatorRight] = useState(true);
   const [animatorLeft, setAnimatorLeft] = useState(true);
   const [animator, setAnimator] = useState(false);
@@ -40,8 +40,13 @@ function Carousel() {
     }))
   );
   const switcherMem = (num) =>
-    num < 0 ? num + allMembers.length : num > 7 ? num - allMembers.length : num;
-  const switcher = (num) => (num < 0 ? num + 6 : num > 5 ? num - 6 : num);
+    num < 0
+      ? num + allMembers.length
+      : num > allMembers.length - 1
+      ? num - allMembers.length
+      : num;
+  const switcher = (num) =>
+    num < 0 ? num + verticals.length : num > 5 ? num - verticals.length : num;
 
   //Image Carousel Animation
   useEffect(() => {
@@ -252,14 +257,14 @@ function Carousel() {
 
     namePlateChanger();
     setTimeout(() => {
-      setnamePlate(allMembers[switcherMem(memberIndx)].name);
+      setnamePlate(allMembers[memberIndx].name);
     }, 500);
     carouselMover();
   }, [memberIndx]);
 
   //Vertical Box Animation
   useEffect(() => {
-    setindx(allMembers[switcherMem(memberIndx)].index);
+    setindx(allMembers[memberIndx].index);
   }, [memberIndx]);
 
   useEffect(() => {

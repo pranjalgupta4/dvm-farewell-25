@@ -31,6 +31,8 @@
   width: 51%;
   @include displayFlex(space-between, column);
   perspective: 1300px;
+  position: absolute;
+  bottom: 5vh;
 
   .carousel {
     width: 100%;
@@ -39,11 +41,12 @@
     position: relative;
     transform-style: preserve-3d;
 
+
     .framedPic {
       width: 41.5%;
       display: grid;
-      grid-template-columns: 1;
-      grid-template-rows: 1;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
       position: absolute;
       top: 0;
 
@@ -130,7 +133,6 @@
       position: absolute;
       bottom: 0;
       left: 50%;
-      transform: translateX(-50%);
 
       p {
         color: white;
@@ -144,9 +146,9 @@
       height: calc(0.075 * 48vw);
       @include displayFlex(center);
       position: absolute;
-      bottom: calc(-0.015 * 48vw);
+      bottom: calc(-0.01 * 48vw);
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate3d(-50%, 0, 50px);
       z-index: 5;
       // display: none;
 

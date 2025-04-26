@@ -43,6 +43,10 @@
   height: 100svh;
   width: 100vw;
   background: center / cover no-repeat url("/public/page/bg.png");
+  @media screen and (max-width: 768px) {
+    background: center / cover no-repeat url("/public/page/bg-mbl.png");
+  }
+  overflow-y: hidden;
 
   .subcontainer {
     height: 100svh;

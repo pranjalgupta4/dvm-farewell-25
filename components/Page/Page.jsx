@@ -1,5 +1,6 @@
 import styles from "./page.module.scss";
 import Carousel from "../carousel/Carousel";
+import MobileView from "../MobileView/MobileView";
 
 import header from "/page/header.png";
 import banner from "/page/farewell-banner.png";
@@ -12,7 +13,6 @@ import oasis from "/page/oasis.svg";
 import apogee from "/page/apogee.svg";
 import randomScroll from "/page/randomScroll.svg";
 import lock from "/page/lock.svg";
-
 import headingLeftDesktop from "/page/headingLeftDesktop.svg";
 import headingRightDesktop from "/page/headingRightDesktop.svg";
 import headingLeftMobile from "/page/headingLeftMobile.svg";
@@ -20,7 +20,6 @@ import headingRightMobile from "/page/headingRightMobile.svg";
 
 import { useEffect, useState } from "react";
 
-import MobileView from "../MobileView/MobileView";
 
 function Page() {
   const [isMobile, setIsMobile] = useState(false);
@@ -167,7 +166,7 @@ function Page() {
             <MobileView />
           </div>
         )}
-        {!isMobile && <Carousel />}
+        {!isMobile && <Carousel/>}
         <img src={date} alt="party-date" className={styles.date} />
       </div>
     </div>
